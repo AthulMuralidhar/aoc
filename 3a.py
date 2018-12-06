@@ -28,9 +28,7 @@ for d in data:
             if i in range(d[0][0],d[0][0]+d[1][0]) and j in range(d[0][1],d[0][1]+d[1][1]):
                     if matrix[j,i] == 0:
                         matrix[j,i] = counter
-                    elif matrix[j,i] != 0 and matrix[j,i] != np.nan:
-                        nan_counter +=1
+                    else:
                         matrix[j,i] = np.nan
-                    
 
-print(nan_counter)
+np.savetxt('out.txt',matrix)
