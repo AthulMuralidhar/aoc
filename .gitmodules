@@ -1,0 +1,3 @@
+[submodule "AdventofCode"]
+	path = AdventofCode
+	url = git@github.com:Ricoter/AdventOfCode.git
