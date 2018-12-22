@@ -15,6 +15,7 @@ state = defaultdict(int)
 rgx = re.compile(r"^#(\d+) @ (\d+),(\d+): (\d+)x(\d+)$")
 result = 0
 no_overlap = None
+
 for claim in data:
     _id, x, y, w, h = map(int, rgx.match(claim).groups())
     for i in range(x, x + w):
