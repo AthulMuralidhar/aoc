@@ -1,15 +1,37 @@
 import numpy as np
-from datetime import datetime
-from collections import defaultdict
+# from datetime import datetime
+import pendulum
+from collections import Counter
 
-data = open('t_input.txt').read().splitlines()
-record = defaultdict(list)
-# print(data)
+# read the data and return it into a list obj with all the lines
+data = sorted(open('t_input.txt').read().splitlines(), key = lambda x: pendulum.parse(x[1:17]))
+print(data)
 
-
-for line in data:
-    record[datetime.strptime("".join(line[:18]),'[%Y-%m-%d %H:%M]')] = line[18:]
-print(sorted(record))
+record = {}
+sleep_counter = {}
+# # timer = None
+#
+# for line in data:
+#     # make a datetime object as key and the rest as the value for record
+#     record[datetime.strptime("".join(line[:18]),'[%Y-%m-%d %H:%M]')] = line[18:]
+#
+# for key in sorted(record):
+#     if 'Guard' in record[key]:
+#         g_id = record[key].strip('begins shift')
+#         sleep_counter[g_id] = datetime.now()-datetime.now()
+#
+# for key in sorted(record):
+#     if 'Guard' in record[key]:
+#         g_id = record[key].strip('begins shift')
+#         timer = None
+#     elif 'falls' in record[key]:
+#         timer = key
+#     elif 'wakes' in record[key]:
+#         timer -= key
+#         sleep_counter[g_id] += timer
+#
+#
+# print(sleep_counter)
 
 # with open('inp.txt','r') as file:
 #     for i in file:
