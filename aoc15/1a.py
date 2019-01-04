@@ -1,6 +1,4 @@
 data = open('r_input.txt').read().splitlines()
-# print(data)
-
 close_number = 0
 open_number = 0
 
