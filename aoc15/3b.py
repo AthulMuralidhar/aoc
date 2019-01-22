@@ -1,43 +1,49 @@
+"""
+sources:https://github.com/ChrisPenner/Advent-Of-Code-Polyglot/blob/master/2015/python/03/part2.py
+sources:https://gitlab.com/gregor_ulm/advent_of_code_2015/blob/master/03/part2.py
+"""
 from collections import defaultdict
 
-data = open('r_input.txt').read().splitlines()
-data = data[0]
-robo_santa_houses = defaultdict(int)
-normal_santa_houses = defaultdict(int)
-robo_santa_pos = (0,0)
-normal_santa_pos = (0,0)
+houses = defaultdict(int)
 
-robo_santa_houses[robo_santa_pos] = 1
-normal_santa_houses[normal_santa_pos] = 1
+def house_counter(data):
+    global houses
+    north_south_counter = 0
+    east_west_counter = 0
+    houses[(north_south_counter,east_west_counter)] = 1
 
-for i,val in enumerate(data):
-    if (i+1)%2 != 0:
-        """ these are santa's coordinates"""
-        if val == '^':
-            normal_santa_pos[0] +=1
-        elif val == 'v':
-            normal_santa_pos[0] -=1
-        elif val == '>':
-            normal_santa_pos[1] +=1
-        elif val == '<':
-            normal_santa_pos[1] -=1
-    else:
-        """ these are robo santa's coordinates"""
-        if val == '^':
-            robo_santa_pos[0] +=1
-        elif val == 'v':
-            robo_santa_pos[0] -=1
-        elif val == '>':
-            robo_santa_pos[1] +=1
-        elif val == '<':
-            robo_santa_pos[1] -=1
+    for i in data:
+        if i == '^':
+            north_south_counter +=1
+        elif i == 'v':
+            north_south_counter -=1
+        elif i == '>':
+            east_west_counter +=1
+        elif i == '<':
+            east_west_counter -=1
 
-    if robo_santa_pos in robo_santa_houses.keys():
-        robo_santa_houses[robo_santa_pos] +=1
-    else:
-        robo_santa_houses[robo_santa_pos] +=1
+        if (north_south_counter,east_west_counter) in houses.keys():
+            houses[(north_south_counter,east_west_counter)] +=1
+        else:
+            houses[(north_south_counter,east_west_counter)] = 1
 
-    if normal_santa_pos in normal_santa_houses.keys():
-        normal_santa_houses[normal_santa_pos] +=1
-    else:
-        normal_santa_houses[normal_santa_pos] +=1
+    total_houses = 0
+    for _ in houses.keys():
+        total_houses +=1
+    return total_houses
+
+if __name__ == '__main__':
+
+    data = open('r_input.txt').read().splitlines()
+    robo_santa_data = []
+    normal_santa_data = []
+
+    for i,val in enumerate(data[0]):
+        if i%2 == 0:
+            normal_santa_data.append(val)
+        else:
+            robo_santa_data.append(val)
+
+
+    house_counter(robo_santa_data)
+    print(house_counter(normal_santa_data))
